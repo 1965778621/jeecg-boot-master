@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.demo.im.manager.mapper.ImUserMapper">
+    <select id="checkOpenid" resultType="java.lang.Integer">
+        select count(openid_mphelper)
+        from im_user
+        where openid_mphelper = #{openidMphelper}
+    </select>
+
+    <update id="updToken">
+        update im_user
+        set token=#{token},
+            token_time=#{tokenTime}
+        where openid_mphelper = #{openidMphelper}
+    </update>
+
+    <update id="updImUser">
+        update im_user
+        set nick_name_mphelper=#{nickNameMphelper},
+            headimgurl=#{headimgurl}
+        where openid_mphelper = #{openidMphelper}
+    </update>
+
+    <select id="getImUser" resultType="org.jeecg.modules.demo.im.manager.entity.ImUser">
+        select *
+        from im_user
+        where openid_mphelper = #{openidMphelper}
+    </select>
+
+    <select id="getToken" resultType="org.jeecg.modules.demo.im.manager.entity.ImUser">
+        select *
+        from im_user
+        where token = #{token}
+    </select>
+
+    <select id="checkToken" resultType="java.lang.Integer">
+        select count(token)
+        from im_user
+        where token = #{token}
+    </select>
+
+    <select id="is_token_valid" resultType="java.lang.Integer">
+        select TIMESTAMPDIFF(hour,token_time, now()) >= 2 pastDueToken
+        from im_user
+        where token = #{token}
+    </select>
+
+    <update id="updImUserCompany">
+        update im_user
+        set real_name=#{realName},
+            tel=#{tel},
+            company_name=#{companyName},
+            company_position=#{companyPosition},
+            company_no=#{companyNo},
+            identification_photo=#{identificationPhoto},
+            status=1,
+            upd_time= now()
+        where token = #{token}
+    </update>
+
+    <update id="delete" parameterType="int">
+        update im_user set del_flag = 1 where id = #{id}
+    </update>
+</mapper>
