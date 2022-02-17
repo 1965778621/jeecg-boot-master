@@ -74,7 +74,21 @@ public class CmsVideoLog implements Serializable {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "观看日期")
     private java.util.Date lookTime;
+    /**删除标志*/
+    @Excel(name = "删除标志", width = 15, dicCode = "del_flag")
+    @Dict(dicCode = "del_flag")
+    @ApiModelProperty(value = "删除标志")
+    private java.lang.Integer delFlag;
+
+    /**
+     * 是否考试 1需要考试 0不需要
+     */
+    @Excel(name = "是否考试", width = 15, dicCode = "if_text")
+    @Dict(dicCode = "if_text")
+    @ApiModelProperty(value = "是否需要考试")
+    private java.lang.Integer ifText;
+
     public static final String COL_DEL_FLAG = "del_flag";
 
-    public static final String USER_ID = "userId";
+    public static final String USER_ID = "user_id";
 }
