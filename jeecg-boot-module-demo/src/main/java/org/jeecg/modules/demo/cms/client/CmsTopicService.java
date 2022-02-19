@@ -11,13 +11,14 @@ import org.jeecg.modules.demo.cms.manager.entity.TestPaperConfig;
 import org.jeecg.modules.demo.cms.manager.mapper.CmsTopicMapper;
 import org.jeecg.modules.demo.cms.manager.mapper.CmsVideoLogMapper;
 import org.jeecg.modules.demo.cms.manager.mapper.TestPaperConfigMapper;
+import org.jeecg.modules.demo.cms.manager.service.ICmsVideoLogService;
 import org.jeecg.modules.demo.cms.manager.service.ITestPaperConfigService;
 import org.jeecg.modules.demo.im.manager.entity.ImUser;
 import org.jeecg.modules.demo.utils.wechat.Constant;
 import org.jeecg.modules.demo.utils.wechat.Tools;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Random;
 
@@ -30,14 +31,16 @@ import java.util.Random;
  */
 @Service
 public class CmsTopicService extends ServiceImpl<CmsTopicMapper, CmsTopic> {
-    @Autowired
+    @Resource
     private CmsVideoLogMapper cmsVideoLogMapper;
-    @Autowired
+    @Resource
     private ITestPaperConfigService iTestPaperConfigService;
-    @Autowired
+    @Resource
     private TestPaperConfigMapper testPaperConfigMapper;
-    @Autowired
+    @Resource
     private CmsTopicMapper cmsTopicMapper;
+    @Resource
+    private ICmsVideoLogService cmsVideoLogService;
 
     /**
      * 获取题目列表
@@ -75,7 +78,9 @@ public class CmsTopicService extends ServiceImpl<CmsTopicMapper, CmsTopic> {
      *
      * @param imUser   用户信息
      * @param cmsVideo 视频id
-     * @return
+     * @return 1.问题判断用户是观看视频的总时长还是单个视频的时长
+     * 2.考试测验还是当总时长超过60分钟后用户考过了开启下一个视频
+     * 3.当前观看总时长累加各个视频观看时长的话 视频A考试考过了 视频B的表数据总时长为0？
      */
     public boolean getVideoWatchTime(ImUser imUser, CmsVideo cmsVideo) {
         //获取用户对应的视频表
@@ -158,6 +163,12 @@ public class CmsTopicService extends ServiceImpl<CmsTopicMapper, CmsTopic> {
         if (score * 1.0 > pass) {
             return true;
         } else {
+            //没及格重置重头开始学
+            List<CmsVideoLog> videoLogByUserId = cmsVideoLogMapper.getVideoLogByUserId(imUser.getId());
+            videoLogByUserId.stream().forEach(cmsVideoLog -> {
+                cmsVideoLog.setIfText(1);
+                cmsVideoLogService.save(cmsVideoLog);
+            });
             return false;
         }
     }

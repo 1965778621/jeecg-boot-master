@@ -2,12 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jeecg.modules.demo.cms.manager.mapper.CmsVideoLogMapper">
 
-    <select id="getVideoLogByUserIdAndVideoId" resultType="org.jeecg.modules.demo.cms.manager.entity.CmsVideoLog"
-            parameterType="integer">
+    <select id="getVideoLogByUserIdAndVideoId" resultType="org.jeecg.modules.demo.cms.manager.entity.CmsVideoLog">
         SELECT total_time, user_id, `current_time`, video_id
         from cms_video_log
         where user_id = #{userId}
           and video_id = #{videoId}
+    </select>
+    <select id="getVideoLogByUserId" resultType="org.jeecg.modules.demo.cms.manager.entity.CmsVideoLog"
+            parameterType="java.lang.Integer">
+        SELECT *
+        from cms_video_log
+        where user_id = #{userId}
     </select>
 
 </mapper>

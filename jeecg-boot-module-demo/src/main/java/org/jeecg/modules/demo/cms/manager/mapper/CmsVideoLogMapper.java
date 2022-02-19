@@ -20,4 +20,12 @@ public interface CmsVideoLogMapper extends BaseMapper<CmsVideoLog> {
      * @return
      */
     CmsVideoLog getVideoLogByUserIdAndVideoId(Integer userId,String videoId);
+
+    /**
+     * 获取用户观看记录
+     * @param userId
+     * @return
+     */
+    List<CmsVideoLog> getVideoLogByUserId(Integer userId);
+
 }
