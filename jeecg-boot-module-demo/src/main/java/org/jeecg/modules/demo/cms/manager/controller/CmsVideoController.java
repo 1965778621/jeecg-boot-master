@@ -74,30 +74,45 @@ public class CmsVideoController extends JeecgController<CmsVideo, ICmsVideoServi
 	}
 
 	/**
-	 *   添加
+	 * 添加
 	 *
 	 * @param cmsVideo
 	 * @return
 	 */
 	@AutoLog(value = "视频-添加")
-	@ApiOperation(value="视频-添加", notes="视频-添加")
+	@ApiOperation(value = "视频-添加", notes = "视频-添加")
 	@PostMapping(value = "/add")
 	public Result<?> add(@RequestBody CmsVideo cmsVideo) {
-		long audioTimeApi = AudioTimeUtils.AudioTimeApi(cmsVideo.getUrldetail());
+		try {
+			Long time = AudioTimeUtils.apiVideoTime(cmsVideo.getUrl());
+			String timeStr = AudioTimeUtils.webVideoTimeStr(cmsVideo.getUrl());
+			cmsVideo.setTime(time);
+			cmsVideo.setTimeStr(timeStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		cmsVideoService.save(cmsVideo);
 		return Result.OK("添加成功！");
 	}
 
 	/**
-	 *  编辑
+	 * 编辑
 	 *
 	 * @param cmsVideo
 	 * @return
 	 */
 	@AutoLog(value = "视频-编辑")
-	@ApiOperation(value="视频-编辑", notes="视频-编辑")
+	@ApiOperation(value = "视频-编辑", notes = "视频-编辑")
 	@PutMapping(value = "/edit")
 	public Result<?> edit(@RequestBody CmsVideo cmsVideo) {
+		try {
+			Long time = AudioTimeUtils.apiVideoTime(cmsVideo.getUrl());
+			String timeStr = AudioTimeUtils.webVideoTimeStr(cmsVideo.getUrl());
+			cmsVideo.setTime(time);
+			cmsVideo.setTimeStr(timeStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		cmsVideoService.updateById(cmsVideo);
 		return Result.OK("编辑成功!");
 	}

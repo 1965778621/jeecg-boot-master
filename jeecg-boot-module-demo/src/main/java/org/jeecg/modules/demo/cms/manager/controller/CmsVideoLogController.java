@@ -36,20 +36,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.jeecg.common.aspect.annotation.AutoLog;
 
-/**
+ /**
  * @Description: 视频播放记录
  * @Author: jeecg-boot
- * @Date:   2022-02-10
+ * @Date:   2022-02-19
  * @Version: V1.0
  */
 @Api(tags="视频播放记录")
 @RestController
-@RequestMapping("/cms/manager/cmsVideoLog")
+@RequestMapping("/cms.manager/cmsVideoLog")
 @Slf4j
 public class CmsVideoLogController extends JeecgController<CmsVideoLog, ICmsVideoLogService> {
 	@Autowired
 	private ICmsVideoLogService cmsVideoLogService;
-
+	
 	/**
 	 * 分页列表查询
 	 *
@@ -71,7 +71,7 @@ public class CmsVideoLogController extends JeecgController<CmsVideoLog, ICmsVide
 		IPage<CmsVideoLog> pageList = cmsVideoLogService.page(page, queryWrapper);
 		return Result.OK(pageList);
 	}
-
+	
 	/**
 	 *   添加
 	 *
@@ -85,7 +85,7 @@ public class CmsVideoLogController extends JeecgController<CmsVideoLog, ICmsVide
 		cmsVideoLogService.save(cmsVideoLog);
 		return Result.OK("添加成功！");
 	}
-
+	
 	/**
 	 *  编辑
 	 *
@@ -99,7 +99,7 @@ public class CmsVideoLogController extends JeecgController<CmsVideoLog, ICmsVide
 		cmsVideoLogService.updateById(cmsVideoLog);
 		return Result.OK("编辑成功!");
 	}
-
+	
 	/**
 	 *   通过id删除
 	 *
@@ -113,7 +113,7 @@ public class CmsVideoLogController extends JeecgController<CmsVideoLog, ICmsVide
 		cmsVideoLogService.removeById(id);
 		return Result.OK("删除成功!");
 	}
-
+	
 	/**
 	 *  批量删除
 	 *
@@ -127,7 +127,7 @@ public class CmsVideoLogController extends JeecgController<CmsVideoLog, ICmsVide
 		this.cmsVideoLogService.removeByIds(Arrays.asList(ids.split(",")));
 		return Result.OK("批量删除成功!");
 	}
-
+	
 	/**
 	 * 通过id查询
 	 *
@@ -145,27 +145,27 @@ public class CmsVideoLogController extends JeecgController<CmsVideoLog, ICmsVide
 		return Result.OK(cmsVideoLog);
 	}
 
-	/**
-	 * 导出excel
-	 *
-	 * @param request
-	 * @param cmsVideoLog
-	 */
-	@RequestMapping(value = "/exportXls")
-	public ModelAndView exportXls(HttpServletRequest request, CmsVideoLog cmsVideoLog) {
-		return super.exportXls(request, cmsVideoLog, CmsVideoLog.class, "视频播放记录");
-	}
+    /**
+    * 导出excel
+    *
+    * @param request
+    * @param cmsVideoLog
+    */
+    @RequestMapping(value = "/exportXls")
+    public ModelAndView exportXls(HttpServletRequest request, CmsVideoLog cmsVideoLog) {
+        return super.exportXls(request, cmsVideoLog, CmsVideoLog.class, "视频播放记录");
+    }
 
-	/**
-	 * 通过excel导入数据
-	 *
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/importExcel", method = RequestMethod.POST)
-	public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
-		return super.importExcel(request, response, CmsVideoLog.class);
-	}
+    /**
+      * 通过excel导入数据
+    *
+    * @param request
+    * @param response
+    * @return
+    */
+    @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
+    public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
+        return super.importExcel(request, response, CmsVideoLog.class);
+    }
 
 }

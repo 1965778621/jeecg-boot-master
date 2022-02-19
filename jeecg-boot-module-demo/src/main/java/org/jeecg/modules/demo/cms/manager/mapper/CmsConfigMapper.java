@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @Version: V1.0
  */
 public interface CmsConfigMapper extends BaseMapper<CmsConfig> {
+    CmsConfig getValueByCmsKey(String cmsKey);
 }

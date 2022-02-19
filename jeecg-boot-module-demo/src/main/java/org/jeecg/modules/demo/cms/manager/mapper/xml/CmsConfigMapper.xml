@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jeecg.modules.demo.cms.manager.mapper.CmsConfigMapper">
 
+    <select id="getValueByCmsKey" resultType="org.jeecg.modules.demo.cms.manager.entity.CmsConfig"
+            parameterType="java.lang.String">
+        select *
+        from cms_config
+        where cms_key = #{cmsKey}
+          and del_flag = '0'
+    </select>
 </mapper>

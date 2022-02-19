@@ -18,7 +18,7 @@ public class VideoDTO {
      */
     @ApiModelProperty(value = "视频id不允许为空", required = true)
     @NotNull(message = "视频id不允许为空")
-    private Integer id;
+    private String id;
 
     /**
      * 当前播放时长

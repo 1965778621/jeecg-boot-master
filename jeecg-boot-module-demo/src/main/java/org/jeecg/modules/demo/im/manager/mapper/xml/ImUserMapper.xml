@@ -40,7 +40,7 @@
     </select>
 
     <select id="is_token_valid" resultType="java.lang.Integer">
-        select TIMESTAMPDIFF(hour,token_time, now()) >= 2 pastDueToken
+        select TIMESTAMPDIFF(hour, token_time, now()) >= 2 pastDueToken
         from im_user
         where token = #{token}
     </select>
@@ -59,6 +59,17 @@
     </update>
 
     <update id="delete" parameterType="int">
-        update im_user set del_flag = 1 where id = #{id}
+        update im_user
+        set del_flag = 1
+        where id = #{id}
+    </update>
+    <update id="updateCertificate">
+        update im_user
+        set certificate_start_time = #{certificateStartTime},
+            certificate_end_time   = #{certificateEndTime},
+            exam_results           =#{examResults},
+            pass_status            = 1,
+            status=100
+        where id = #{id}
     </update>
 </mapper>

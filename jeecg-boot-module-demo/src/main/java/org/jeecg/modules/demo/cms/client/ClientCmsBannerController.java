@@ -49,13 +49,5 @@ public class ClientCmsBannerController {
                                          @RequestParam(defaultValue = "10") long size) {
         return Result.OK(cmsBannerService.list(current, size));
     }
-    @ApiOperation(value = "测试")
-    @GetMapping("/min")
-    public Result a(){
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            System.out.println("random.nextInt(3) = " + random.nextInt(3));
-        }
-        return null;
-    }
+
 }

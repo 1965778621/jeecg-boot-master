@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
  * @Version: V1.0
  */
 @Data
-@TableName("cms_test_paper_config")
+@TableName("test_paper_config")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="test_paper_config对象", description="试卷配置")

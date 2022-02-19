@@ -30,4 +30,5 @@ public interface ImUserMapper extends BaseMapper<ImUser> {
     int is_token_valid(@Param(value = "token") String token);
 
     int updImUserCompany(ImUser imUser);
+    Integer updateCertificate(ImUser imUser);
 }

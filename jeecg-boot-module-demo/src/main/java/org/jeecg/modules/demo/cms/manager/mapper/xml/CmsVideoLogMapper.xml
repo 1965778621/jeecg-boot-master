@@ -8,11 +8,52 @@
         where user_id = #{userId}
           and video_id = #{videoId}
     </select>
+
+    <update id="changeGrade">
+        update cms_video_log
+        set if_text = #{ifText}
+        where id = #{id}
+    </update>
+
+
+    <select id="checkGetVideoLog" resultType="java.lang.Integer">
+        SELECT count(id)
+        from cms_video_log
+        where user_id = #{userId}
+          and video_id = #{videoId}
+    </select>
+
+    <select id="checkGetVideoLogTimeTotal" resultType="java.lang.Long">
+        SELECT sum(present_time) timeTotal
+        FROM cms_video_log
+        WHERE user_id = #{id}
+    </select>
+
+    <select id="getVideoLogByVideoId" resultType="org.jeecg.modules.demo.cms.manager.dto.CmsVideoLogDTO">
+        SELECT co.img,
+               co.url,
+               co.title,
+               cvl.present_time,
+               cvl.user_id,
+               cvl.`present_time_str`,
+               cvl.video_id
+        FROM cms_video_log cvl
+                 LEFT JOIN cms_video co ON co.id = cvl.video_id
+        where user_id = #{userId}
+          and video_id = #{videoId}
+        ORDER BY cvl.id DESC
+        LIMIT 0,1
+    </select>
     <select id="getVideoLogByUserId" resultType="org.jeecg.modules.demo.cms.manager.entity.CmsVideoLog"
             parameterType="java.lang.Integer">
         SELECT *
         from cms_video_log
         where user_id = #{userId}
     </select>
-
+    <update id="updCmsVideoLog">
+        update cms_video_log
+        set present_time=#{presentTime},
+            present_time_str=#{presentTimeStr}
+        where id = #{id}
+    </update>
 </mapper>

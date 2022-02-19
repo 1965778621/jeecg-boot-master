@@ -252,6 +252,7 @@
     <orderEntry type="library" name="Maven: com.qcloud:cos_api:5.6.24" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.9" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.64" level="project" />
+    <orderEntry type="library" name="Maven: cn.hutool:hutool-all:4.5.15" level="project" />
     <orderEntry type="library" name="Maven: com.tencentcloudapi:tencentcloud-sdk-java:3.1.390" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp:okhttp:2.7.5" level="project" />
     <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
