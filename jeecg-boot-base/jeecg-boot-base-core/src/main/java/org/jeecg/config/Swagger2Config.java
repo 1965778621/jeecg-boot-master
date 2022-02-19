@@ -94,7 +94,24 @@ public class Swagger2Config implements WebMvcConfigurer {
     @Bean
     public Docket 视频管理信息() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("视频管理")
+                .groupName("视频和轮播图管理")
+                .apiInfo(apiInfo())
+                .select()
+                //此包路径下的类，才生成接口文档
+                .apis(RequestHandlerSelectors.basePackage("org.jeecg.modules.demo.cms.client"))
+                //加了ApiOperation注解的类，才生成接口文档
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .paths(PathSelectors.any())
+                .build();
+        //.securitySchemes(Collections.singletonList(securityScheme()));
+        //.globalOperationParameters(setHeaderToken());
+    }
+
+    //张海
+    @Bean
+    public Docket 考试管理信息() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("考试管理")
                 .apiInfo(apiInfo())
                 .select()
                 //此包路径下的类，才生成接口文档

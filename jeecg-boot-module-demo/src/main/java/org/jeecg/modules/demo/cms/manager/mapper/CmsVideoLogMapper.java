@@ -13,5 +13,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @Version: V1.0
  */
 public interface CmsVideoLogMapper extends BaseMapper<CmsVideoLog> {
-
+    /**
+     * 获取观看记录
+     * @param userId 用户id
+     * @param videoId 视频id
+     * @return
+     */
+    CmsVideoLog getVideoLogByUserIdAndVideoId(Integer userId,String videoId);
 }

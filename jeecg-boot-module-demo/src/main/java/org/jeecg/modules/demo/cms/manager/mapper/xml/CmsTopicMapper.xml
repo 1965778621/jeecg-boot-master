@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jeecg.modules.demo.cms.manager.mapper.CmsTopicMapper">
 
+<!--    <select id="getCount" resultType="java.lang.Integer">-->
+<!--        select count(*) from cms_topic where videoCode = #{videoId} and topic_type = #{topicType}-->
+<!--    </select>-->
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from cms_topic where topic_type = #{topicType}
+    </select>
 </mapper>

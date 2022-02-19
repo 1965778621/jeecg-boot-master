@@ -346,7 +346,7 @@ third-app:
 tencent:
   appid: wxfbbd6809d6092a7a
   appsecret: 478fa74f04f6e9e503fbe7ba009a4e88
-  callback: https://hg1215.vicp.fun/jeecg-boot/callback
+  callback: https://api.ysfgpx.cn/jeecg-boot/callback
 account:
   secret-id: 1400630124
   secret-key: 6e8a41eda4179ba9dd7b6c6262470129

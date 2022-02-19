@@ -81,11 +81,11 @@ public class CmsVideoLog implements Serializable {
     private java.lang.Integer delFlag;
 
     /**
-     * 是否考试 1需要考试 0不需要
+     * 是否重置 0正常 1是置为历史（视频可以再次观看记录）
      */
-    @Excel(name = "是否考试", width = 15, dicCode = "if_text")
+    @Excel(name = "是否重置", width = 15, dicCode = "if_text")
     @Dict(dicCode = "if_text")
-    @ApiModelProperty(value = "是否需要考试")
+    @ApiModelProperty(value = "是否重置")
     private java.lang.Integer ifText;
 
     public static final String COL_DEL_FLAG = "del_flag";

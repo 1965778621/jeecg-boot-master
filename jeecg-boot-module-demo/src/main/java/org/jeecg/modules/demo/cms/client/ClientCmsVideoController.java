@@ -76,17 +76,29 @@ public class ClientCmsVideoController {
         if (checkUserToken == 0) {
             return Result.error520("token不存在或已经过期了！");
         }
+        /**
+         * 逻辑修改
+         * 1.先查看用户是否观看过该视频 视频记录表
+         * 2.总时长
+         */
         ImUser imUserSelect = imUserMapper.getToken(videoDTO.getToken());
         CmsVideo ad = cmsVideoService.getById(videoDTO.getId());
-        CmsVideoLog cmsVideoLog = new CmsVideoLog();
-        cmsVideoLog.setVideoId(videoDTO.getId());
-        cmsVideoLog.setPresentTime(videoDTO.getPresentTime());
-        cmsVideoLog.setPresentTimeStr(videoDTO.getPresentTimeStr());
-        cmsVideoLog.setTitle(ad.getTitle());
-        cmsVideoLog.setUserId(imUserSelect.getId());
-        cmsVideoLog.setTzType(ad.getTzType());
-        cmsVideoLog.setTzUrl(ad.getTzUrl());
-        cmsVideoLog.setLookTime(new Date());
+        CmsVideoLog cmsVideoLog = cmsVideoLogService.getById(videoDTO.getId());
+        if (!cmsVideoLog.getId().isEmpty()){
+            // 若存在 更改视频时间
+            cmsVideoLog.setPresentTime(videoDTO.getPresentTime());
+            cmsVideoLog.setPresentTimeStr(videoDTO.getPresentTimeStr());
+        }else {
+            cmsVideoLog.setVideoId(videoDTO.getId());
+            cmsVideoLog.setPresentTime(videoDTO.getPresentTime());
+            cmsVideoLog.setPresentTimeStr(videoDTO.getPresentTimeStr());
+            cmsVideoLog.setTitle(ad.getTitle());
+            cmsVideoLog.setUserId(imUserSelect.getId());
+            cmsVideoLog.setTzType(ad.getTzType());
+            cmsVideoLog.setTzUrl(ad.getTzUrl());
+            cmsVideoLog.setLookTime(new Date());
+        }
+
         boolean b = true;
         if (b) {
             cmsVideoLogService.save(cmsVideoLog);

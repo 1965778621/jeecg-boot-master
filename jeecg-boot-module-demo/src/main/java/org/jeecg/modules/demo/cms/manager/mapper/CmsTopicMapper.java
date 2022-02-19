@@ -13,5 +13,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @Version: V1.0
  */
 public interface CmsTopicMapper extends BaseMapper<CmsTopic> {
+    /**
+     * 考试题目类型
+//     * @param videoId 视频id
+     * @param topicType 题目类型
+     * @return
+     * //    Integer getCount(String videoId,String topicType);
+     */
+    Integer getCount(String topicType);
+
 
 }

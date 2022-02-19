@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Random;
 
 /**
  * \* @author ZH
@@ -34,7 +35,7 @@ public class ClientCmsBannerController {
     private CmsBannerService cmsBannerService;
     @ApiOperation(value = "获取单个轮播图，先要获取轮播图列表", notes = "id:轮播图id")
     @GetMapping("/get")
-    public Result<CmsBanner> get(Integer id) {
+    public Result<CmsBanner> get(String id) {
         return Result.OK(cmsBannerService.getById(id));
     }
 
@@ -47,5 +48,14 @@ public class ClientCmsBannerController {
     public Result<IPage<CmsBanner>> list(@RequestParam(defaultValue = "1") long current,
                                          @RequestParam(defaultValue = "10") long size) {
         return Result.OK(cmsBannerService.list(current, size));
+    }
+    @ApiOperation(value = "测试")
+    @GetMapping("/min")
+    public Result a(){
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            System.out.println("random.nextInt(3) = " + random.nextInt(3));
+        }
+        return null;
     }
 }
